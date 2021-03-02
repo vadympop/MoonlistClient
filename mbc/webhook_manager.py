@@ -73,9 +73,14 @@ class WebhookManager:
 
     async def _handler(self, request: web.Request):
         data = await request.json()
-        if request.headers.get("Authorization") != self.find(
-                endpoint=request.rel_url, trigger=data.get("trigger")
-        ):
+        webhook = self.find(
+            endpoint=request.rel_url,
+            trigger=data.get("trigger")
+        )
+        if webhook is None:
+            return web.Response(status=404, text="Not found")
+
+        if request.headers.get("Authorization") != webhook.token:
             return web.Response(status=400, text="An invalid token was provided")
 
         self.bot.dispatch(data.get("trigger"), data)
