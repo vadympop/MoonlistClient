@@ -73,6 +73,7 @@ class WebhookManager:
 
     async def _handler(self, request: web.Request):
         data = await request.json()
+        print(request.rel_url)
         webhook = self.find(
             endpoint=request.rel_url,
             trigger=data.get("trigger")
