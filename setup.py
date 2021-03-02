@@ -14,7 +14,7 @@ setup(
     url="https://github.com/VadyChel/MoonbotsClient",
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU v3 License",
+        "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
     ]
 )
