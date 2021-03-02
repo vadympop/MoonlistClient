@@ -31,41 +31,41 @@ class ApiClient:
             else:
                 raise ServerError(response)
 
-    async def get_bot(self, bot_id: int):
+    async def get_bot(self, bot_id: int) -> dict:
         return await self.request("GET", f"/bots/{bot_id}")
 
-    async def get_bots(self, limit: int = 20, skip: int = 0):
+    async def get_bots(self, limit: int = 20, skip: int = 0) -> list:
         return await self.request(
             "GET",
             f"/bots",
             params={"limit": limit, "skip": skip}
         )
 
-    async def get_bumps(self, bot_id: int):
+    async def get_bumps(self, bot_id: int) -> list:
         return await self.request("GET", f"/bots/{bot_id}/bumps")
 
-    async def get_bumps_count(self, bot_id: int):
+    async def get_bumps_count(self, bot_id: int) -> dict:
         return await self.request("GET", f"/bots/{bot_id}/bumps/count")
 
-    async def get_comments(self, bot_id: int):
+    async def get_comments(self, bot_id: int) -> list:
         return await self.request("GET", f"/comments/{bot_id}")
 
-    async def get_user_reports(self, user_id: int):
+    async def get_user_reports(self, user_id: int) -> list:
         return await self.request("GET", f"/reports/{user_id}")
 
-    async def get_reports(self):
+    async def get_reports(self) -> list:
         return await self.request("GET", f"/reports")
 
-    async def get_user(self, user_id: int):
+    async def get_user(self, user_id: int) -> dict:
         return await self.request("GET", f"/users/{user_id}")
 
-    async def get_user_bots(self, user_id: int):
+    async def get_user_bots(self, user_id: int) -> list:
         return await self.request("GET", f"/users/{user_id}/bots")
 
-    async def get_bot_stats(self, bot_id: int):
+    async def get_bot_stats(self, bot_id: int) -> list:
         return await self.request("GET", f"/bots/{bot_id}/stats")
 
-    async def get_bot_stat(self, bot_id: int):
+    async def get_bot_stat(self, bot_id: int) -> dict:
         return await self.request("GET", f"/bots/{bot_id}/stat")
 
     async def post_bot_stat(self, bot_id: int, guilds: int, users: int, shards: int = 0):

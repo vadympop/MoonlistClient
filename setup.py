@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='mbc',
-    version='0.2.2',
+    version='0.3',
     description='Wrapper for the moonbots api',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -16,5 +16,10 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
+    ],
+    install_requires=[
+        "pydantic",
+        "discord.py",
+        "aiohttp"
     ]
 )

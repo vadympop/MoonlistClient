@@ -1,6 +1,6 @@
 import typing
+import discord
 from .exceptions import *
-from discord.ext import commands
 from aiohttp import web
 
 
@@ -29,8 +29,8 @@ class Webhook:
 class WebhookManager:
     _webserver: web.TCPSite
 
-    def __init__(self, bot: commands.Bot, port: int, host: str):
-        self.bot: commands.Bot = bot
+    def __init__(self, bot: discord.Client, port: int, host: str):
+        self.bot: discord.Client = bot
         self.webhooks: typing.List[Webhook] = []
         self.port: int = port
         self.host = host
