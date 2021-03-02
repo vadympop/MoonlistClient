@@ -11,16 +11,16 @@ class MoonbotsClient:
 
     def __init__(self, bot: commands.Bot, api_key: str, autopost: bool = True, **kwargs):
         self.bot: commands.Bot = bot
-        self.loop: asyncio.AbstractEventLoop = kwargs.get("loop") or self.bot.loop
+        self.loop: asyncio.AbstractEventLoop = kwargs.get("loop", self.bot.loop)
         self.autopost: bool = autopost
         self.http: ApiClient = ApiClient(api_key)
         self._is_closed: bool = False
 
-        if kwargs.get("webhook", default=False):
+        if kwargs.get("webhook", False):
             self.webhook_manager = WebhookManager(
                 bot=self.bot,
-                port=kwargs.get("port", default=5000),
-                host=kwargs.get("host", default="0.0.0.0")
+                port=kwargs.get("port", 5000),
+                host=kwargs.get("host", "0.0.0.0")
             )
 
         if self.autopost:
