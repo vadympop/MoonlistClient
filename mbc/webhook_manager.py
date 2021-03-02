@@ -17,7 +17,8 @@ class Webhook:
                 "new_comment",
                 "bot_edit_currently",
                 "bot_edit",
-                "bot_delete"
+                "bot_delete",
+                "new_bump"
         ):
             raise ClientException("An invalid webhook trigger was provided")
 
@@ -73,9 +74,8 @@ class WebhookManager:
 
     async def _handler(self, request: web.Request):
         data = await request.json()
-        print(request.rel_url)
         webhook = self.find(
-            endpoint=request.rel_url,
+            endpoint=str(request.rel_url),
             trigger=data.get("trigger")
         )
         if webhook is None:
