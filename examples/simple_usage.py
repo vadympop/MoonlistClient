@@ -1,19 +1,3 @@
-# Wrapper for the moonbots api
-> Wrapper for the moonbots api with webhook and auto post data supporting
-
-# How to install?
-> From pip:
-> ```
-> pip install mbc
-> ```
-> From source:
-> ```
-> pip install git+https://github.com/VadyChel/MoonbotsClient
-> ```
-
-# Examples
-Simple usage:
-```py
 from mbc import MoonbotsClient, HTTPException
 from discord.ext import commands, tasks
 
@@ -38,6 +22,3 @@ class MBCExample(commands.Cog):
 
 def setup(client):
     client.add_cog(MBCExample(client))
-```
-
-Other examples you can see in [examples directory](https://github.com/VadyChel/MoonbotsClient/tree/main/examples)

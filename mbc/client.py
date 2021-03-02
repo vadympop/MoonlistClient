@@ -30,16 +30,19 @@ class MoonbotsClient:
     async def autopost_loop(self):
         while self.bot.is_ready():
             try:
-                await self.http.post_bot_stat(
-                    bot_id=self.bot.user.id,
-                    guilds=len(self.bot.guilds),
-                    users=len(self.bot.users),
-                    shards=self.bot.shard_count or 0
-                )
-                await self.bot.dispatch("post_stat")
+                await self.post_stat()
             except HTTPException:
                 pass
             await asyncio.sleep(10800)
+
+    async def post_stat(self):
+        await self.http.post_bot_stat(
+            bot_id=self.bot.user.id,
+            guilds=len(self.bot.guilds),
+            users=len(self.bot.users),
+            shards=self.bot.shard_count or 0
+        )
+        await self.bot.dispatch("post_stat")
 
     async def get_bot(self, bot_id: int) -> Bot:
         return Bot(**await self.http.get_bot(bot_id))
