@@ -7,7 +7,8 @@ class MBCExample(commands.Cog):
         self.bot = bot
         self.mclient = MoonbotsClient(
             bot=self.bot,
-            api_key="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+            api_key="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            autopost=False
         )
         self.post_stat_loop.start()
 
