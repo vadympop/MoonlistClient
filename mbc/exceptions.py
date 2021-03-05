@@ -3,7 +3,8 @@ class MoonbotsException(BaseException):
 
 
 class HTTPException(MoonbotsException):
-    pass
+    def __init__(self, json):
+        self.json = json
 
 
 class ClientException(MoonbotsException):

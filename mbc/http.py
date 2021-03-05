@@ -19,17 +19,18 @@ class ApiClient:
         }
 
         async with self.session.request(method, self.base_url+endpoint, **kwargs) as response:
+            response_json = await response.json()
             if 300 > response.status >= 200:
-                return await response.json()
+                return response_json
 
             if response.status == 404:
-                raise NotFound(response)
+                raise NotFound(response_json)
             elif response.status == 400:
-                raise BadRequest(response)
+                raise BadRequest(response_json)
             elif response.status == 403:
-                raise Forbidden(response)
+                raise Forbidden(response_json)
             else:
-                raise ServerError(response)
+                raise ServerError(response_json)
 
     async def get_bot(self, bot_id: int) -> dict:
         return await self.request("GET", f"/bots/{bot_id}")
