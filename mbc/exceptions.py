@@ -29,3 +29,7 @@ class BadRequest(HTTPException):
 
 class ServerError(HTTPException):
     pass
+
+
+class RateLimited(HTTPException):
+    pass

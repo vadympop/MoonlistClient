@@ -30,6 +30,8 @@ class ApiClient:
                 raise BadRequest(response_json)
             elif response.status == 403:
                 raise Forbidden(response_json)
+            elif response.status == 429:
+                raise RateLimited(response_json)
             else:
                 raise ServerError(response_json)
 

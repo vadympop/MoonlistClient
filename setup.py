@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='mbc',
-    version='0.4.3',
+    version='0.4.4',
     description='Wrapper for the moonbots api',
     long_description=long_description,
     long_description_content_type="text/markdown",
