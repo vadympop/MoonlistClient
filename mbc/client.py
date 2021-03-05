@@ -14,15 +14,15 @@ class MoonbotsClient:
         self.bot: discord.Client = bot
         self.loop: asyncio.AbstractEventLoop = kwargs.get("loop", self.bot.loop)
         self.autopost: bool = autopost
-        self.http: ApiClient = ApiClient(api_key)
+        self.http: ApiClient = kwargs.get("api_client", ApiClient(api_key))
         self._is_closed: bool = False
 
         if kwargs.get("webhook", False):
-            self.webhook_manager = WebhookManager(
+            self.webhook_manager = kwargs.get("webhook_manager", WebhookManager(
                 bot=self.bot,
                 port=kwargs.get("port", 5000),
                 host=kwargs.get("host", "0.0.0.0")
-            )
+            ))
 
         if self.autopost:
             self._autopost_loop = self.loop.create_task(self.autopost_loop())

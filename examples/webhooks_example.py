@@ -55,6 +55,10 @@ class MBCExample(commands.Cog):
         )
 
     @commands.Cog.listener()
+    async def on_ready(self):
+        await self.mclient.webhook_manager.run()
+
+    @commands.Cog.listener()
     async def on_new_bot(self, data):
         print("New bot was added. It data:\n", data)
 
