@@ -34,8 +34,8 @@ class WebhookManager:
         self.webhooks: typing.List[Webhook] = []
         self.port: int = port
         self.host = host
-        self.last_id: int = 0
-        self.__app: web.Application = web.Application()
+        self._last_id: int = 0
+        self._app: web.Application = web.Application()
         self._is_closed: bool = False
 
     def add(self, webhook: Webhook) -> Webhook:
@@ -68,8 +68,8 @@ class WebhookManager:
         ]
 
     def _generate_id(self):
-        new_id = self.last_id + 1
-        self.last_id = new_id
+        new_id = self._last_id + 1
+        self._last_id = new_id
         return new_id
 
     async def _handler(self, request: web.Request):
@@ -89,9 +89,9 @@ class WebhookManager:
 
     async def run(self):
         for webhook in self.webhooks:
-            self.__app.router.add_post(webhook.endpoint, self._handler)
+            self._app.router.add_post(webhook.endpoint, self._handler)
 
-        runner = web.AppRunner(self.__app)
+        runner = web.AppRunner(self._app)
         await runner.setup()
         self._webserver = web.TCPSite(runner, self.host, self.port)
         await self._webserver.start()
