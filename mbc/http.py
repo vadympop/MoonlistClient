@@ -14,9 +14,10 @@ class ApiClient:
             raise Unauthorized("You didn't provide an api key")
 
     async def request(self, method: str, endpoint: str, **kwargs):
-        kwargs["headers"] = {
-            "Authorization": self.api_key
-        }
+        if "headers" not in kwargs.keys():
+            kwargs["headers"] = {
+                "Authorization": self.api_key
+            }
 
         async with self.session.request(method, self.base_url+endpoint, **kwargs) as response:
             response_json = await response.json()
