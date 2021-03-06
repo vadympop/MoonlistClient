@@ -36,7 +36,7 @@ class WebhookManager:
         self.host = host
         self._last_id: int = 0
         self._app: web.Application = web.Application()
-        self._is_closed: bool = False
+        self._is_ran: bool = False
 
     def add(self, webhook: Webhook) -> Webhook:
         webhook.id = self._generate_id()
@@ -88,17 +88,19 @@ class WebhookManager:
         return web.Response(status=204)
 
     async def run(self):
-        for webhook in self.webhooks:
-            self._app.router.add_post(webhook.endpoint, self._handler)
+        if not self._is_ran:
+            self._is_ran = True
+            for webhook in self.webhooks:
+                self._app.router.add_post(webhook.endpoint, self._handler)
 
-        runner = web.AppRunner(self._app)
-        await runner.setup()
-        self._webserver = web.TCPSite(runner, self.host, self.port)
-        await self._webserver.start()
+            runner = web.AppRunner(self._app)
+            await runner.setup()
+            self._webserver = web.TCPSite(runner, self.host, self.port)
+            await self._webserver.start()
 
     async def close(self):
-        if self._is_closed:
+        if not self._is_ran:
             return
 
         await self._webserver.stop()
-        self._is_closed = True
+        self._is_ran = False
