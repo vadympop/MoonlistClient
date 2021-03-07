@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setup(
     name='mbc',
     version='0.4.6',
-    description='Wrapper for the moonbots api',
+    description='Wrapper for the moonlist api',
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=['mbc'],

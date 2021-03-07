@@ -1,5 +1,5 @@
-# Wrapper for the moonbots api
-> Wrapper for the moonbots api with webhook and auto post data supporting
+# Wrapper for the moonlist api
+> Wrapper for the moonlist api with webhook and auto post data supporting
 
 # How to install?
 > From pip:
