@@ -1,6 +1,6 @@
 import aiohttp
 import asyncio
-from mbc.exceptions import *
+from mlc.exceptions import *
 
 
 class ApiClient:
@@ -82,6 +82,12 @@ class ApiClient:
                 "shards": shards
             }
         )
+
+    async def get_servers(self) -> list:
+        return await self.request("GET", "/servers")
+
+    async def get_server(self, guild_id: int) -> dict:
+        return await self.request("GET", f"/servers/{guild_id}")
 
     async def close(self):
         await self.session.close()

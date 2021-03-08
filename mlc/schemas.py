@@ -3,6 +3,24 @@ import typing
 from pydantic import BaseModel
 
 
+class BotStat(BaseModel):
+    id: int
+    time: datetime.datetime
+    bot_id: int
+    users: int
+    guilds: int
+    shards: int
+
+
+class DiscordUser(BaseModel):
+    id: str
+    username: str
+    avatar: typing.Optional[str]
+    discriminator: str
+    public_flags: int
+    bot: bool = False
+
+
 class BotOptions(BaseModel):
     github: typing.Optional[str]
     website: typing.Optional[str]
@@ -13,7 +31,6 @@ class BotOptions(BaseModel):
 class Bot(BaseModel):
     id: int
     bot_id: int
-    owner_id: int
     currently: int
     created_at: datetime.datetime
     short_description: str
@@ -24,18 +41,14 @@ class Bot(BaseModel):
     lib: str
     hidden: bool
     pinned: bool
-    owners: list
     options: BotOptions
     badges: list
     verificated: bool
-
-
-class BotStat(BaseModel):
-    id: int
-    bot_id: int
-    users: int
-    guilds: int
-    shards: int
+    stat: typing.Optional[BotStat]
+    count_bumps: int
+    discord: dict
+    owner: DiscordUser
+    owners: typing.List[typing.Optional[DiscordUser]]
 
 
 class Bump(BaseModel):
@@ -79,3 +92,14 @@ class User(BaseModel):
     bots: list = []
     options: dict
     badges: list
+
+
+class Server(BaseModel):
+    id: int
+    guild_id: int
+    owner_id: int
+    created_at: datetime.datetime
+    invite: str
+    short_description: str
+    description: str
+    features: dict

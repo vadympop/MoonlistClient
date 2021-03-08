@@ -1,11 +1,11 @@
-from mbc import MoonbotsClient, HTTPException
+from mlc import MoonlistClient, HTTPException
 from discord.ext import commands, tasks
 
 
-class MBCExample(commands.Cog):
+class MLCExample(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.mclient = MoonbotsClient(
+        self.mclient = MoonlistClient(
             bot=self.bot,
             api_key="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             autopost=False
@@ -22,4 +22,4 @@ class MBCExample(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(MBCExample(client))
+    client.add_cog(MLCExample(client))

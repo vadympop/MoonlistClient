@@ -1,11 +1,11 @@
-from mbc import MoonbotsClient, Webhook
+from mlc import MoonlistClient, Webhook
 from discord.ext import commands
 
 
-class MBCExample(commands.Cog):
+class MLCExample(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.mclient = MoonbotsClient(
+        self.mclient = MoonlistClient(
             bot=self.bot,
             api_key="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             webhook=True,
@@ -84,4 +84,4 @@ class MBCExample(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(MBCExample(client))
+    client.add_cog(MLCExample(client))

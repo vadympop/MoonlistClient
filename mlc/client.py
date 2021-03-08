@@ -77,6 +77,12 @@ class MoonbotsClient:
     async def get_bot_stat(self, bot_id: int) -> BotStat:
         return BotStat(**await self.http.get_bot_stat(bot_id))
 
+    async def get_servers(self) -> typing.List[Server]:
+        return list(map(lambda item: Server(**item), await self.http.get_servers()))
+
+    async def get_server(self, guild_id: int) -> Server:
+        return Server(**await self.http.get_server(guild_id))
+
     async def close(self):
         if self._is_closed:
             return

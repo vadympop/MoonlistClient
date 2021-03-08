@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='mbc',
-    version='0.4.6',
+    name='mlc',
+    version='0.5',
     description='Wrapper for the moonlist api',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=['mbc'],
+    packages=['mlc'],
     author_email='zyzel19@gmail.com',
-    url="https://github.com/VadyChel/MoonbotsClient",
+    url="https://github.com/VadyChel/MoonlistClient",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU Affero General Public License v3",
