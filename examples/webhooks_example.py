@@ -1,4 +1,4 @@
-from mlc import MoonlistClient, Webhook
+from moonlistclient import MoonlistClient, Webhook
 from discord.ext import commands
 
 

@@ -1,4 +1,4 @@
-from mlc import MoonlistClient
+from moonlistclient import MoonlistClient
 from discord.ext import commands
 
 

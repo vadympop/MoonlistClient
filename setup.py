@@ -4,12 +4,12 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='mlc',
+    name='moonlistclient',
     version='0.5',
     description='Wrapper for the moonlist api',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=['mlc'],
+    packages=['moonlistclient'],
     author_email='zyzel19@gmail.com',
     url="https://github.com/VadyChel/MoonlistClient",
     classifiers=[

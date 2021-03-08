@@ -4,7 +4,7 @@
 # How to install?
 > From pip:
 > ```
-> pip install mlc
+> pip install moonlistclient
 > ```
 > From source:
 > ```
@@ -14,7 +14,7 @@
 # Examples
 Simple usage:
 ```py
-from mlc import MoonlistClient, HTTPException
+from moonlistclient import MoonlistClient, HTTPException
 from discord.ext import commands, tasks
 
 

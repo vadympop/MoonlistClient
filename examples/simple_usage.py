@@ -1,4 +1,4 @@
-from mlc import MoonlistClient, HTTPException
+from moonlistclient import MoonlistClient, HTTPException
 from discord.ext import commands, tasks
 
 

@@ -1,6 +1,6 @@
 import aiohttp
 import asyncio
-from mlc.exceptions import *
+from moonlistclient.exceptions import *
 
 
 class ApiClient:
