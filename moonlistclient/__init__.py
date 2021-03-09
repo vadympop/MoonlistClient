@@ -1,4 +1,4 @@
-from .client import MoonbotsClient
+from .client import MoonlistClient
 from .exceptions import *
 from .http import ApiClient
 from .webhook_manager import *

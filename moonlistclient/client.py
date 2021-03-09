@@ -6,7 +6,7 @@ from .exceptions import *
 from .webhook_manager import WebhookManager
 
 
-class MoonbotsClient:
+class MoonlistClient:
     _autopost_loop: asyncio.Task
     webhook_manager: WebhookManager
 
