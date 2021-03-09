@@ -103,3 +103,4 @@ class Server(BaseModel):
     short_description: str
     description: str
     features: dict
+    tags: list
