@@ -66,7 +66,7 @@ class MoonlistClient:
         return list(map(lambda item: Report(**item), await self.http.get_reports()))
 
     async def get_user(self, user_id: int) -> User:
-        return await self.get_user(user_id)
+        return User(**await self.http.get_user(user_id))
 
     async def get_user_bots(self, user_id: int) -> typing.List[Bot]:
         return list(map(lambda item: Bot(**item), await self.http.get_user_bots(user_id)))
