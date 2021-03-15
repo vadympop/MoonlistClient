@@ -1,6 +1,6 @@
 import asyncio
 import discord
-from .schemas import *
+from moonlistclient.models.api import *
 from .http import ApiClient
 from .exceptions import *
 from .webhook_manager import WebhookManager

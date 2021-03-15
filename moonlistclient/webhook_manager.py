@@ -1,7 +1,21 @@
 import typing
 import discord
+from .models import webhooks
 from .exceptions import *
 from aiohttp import web
+
+
+TRIGGER_TO_MODEl = {
+    "new_bot": webhooks.NewBotWebhook,
+    "new_comment": webhooks.NewCommentWebhook,
+    "bot_edit_currently": webhooks.BotEditCurrentlyWebhook,
+    "bot_edit": webhooks.BotEditWebhook,
+    "bot_delete": webhooks.BotDeleteWebhook,
+    "new_bump": webhooks.NewBumpWebhook,
+    "new_server": webhooks.NewServerWebhook,
+    "server_edit": webhooks.ServerEditWebhook,
+    "server_delete": webhooks.ServerDeleteWebhook
+}
 
 
 class Webhook:
@@ -13,12 +27,15 @@ class Webhook:
         self.trigger: str = trigger.lower()
 
         if self.trigger not in (
-                "new_bot",
-                "new_comment",
-                "bot_edit_currently",
-                "bot_edit",
-                "bot_delete",
-                "new_bump"
+            "new_bot",
+            "new_comment",
+            "bot_edit_currently",
+            "bot_edit",
+            "bot_delete",
+            "new_bump",
+            "new_server",
+            "server_edit",
+            "server_delete"
         ):
             raise ClientException("An invalid webhook trigger was provided")
 
@@ -84,7 +101,7 @@ class WebhookManager:
         if request.headers.get("Authorization") != webhook.token:
             return web.Response(status=400, text="An invalid token was provided")
 
-        self.bot.dispatch(data.get("trigger"), data)
+        self.bot.dispatch(data.get("trigger"), TRIGGER_TO_MODEl[data.get("trigger")](**data))
         return web.Response(status=204)
 
     async def run(self):

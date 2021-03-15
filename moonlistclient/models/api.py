@@ -1,5 +1,6 @@
 import datetime
 import typing
+from moonlistclient.models.discord import DiscordUser
 from pydantic import BaseModel
 
 
@@ -10,15 +11,6 @@ class BotStat(BaseModel):
     users: int
     guilds: int
     shards: int
-
-
-class DiscordUser(BaseModel):
-    id: str
-    username: str
-    avatar: typing.Optional[str]
-    discriminator: str
-    public_flags: int
-    bot: bool = False
 
 
 class BotOptions(BaseModel):
@@ -32,7 +24,7 @@ class Bot(BaseModel):
     id: int
     bot_id: int
     currently: int
-    created_at: datetime.datetime
+    added_at: datetime.datetime
     short_description: str
     description: str
     invite: str
@@ -82,15 +74,26 @@ class Report(BaseModel):
     state: int
 
 
+class UserSocial(BaseModel):
+    github: typing.Optional[str]
+    website: typing.Optional[str]
+    youtube: typing.Optional[str]
+    discord: typing.Optional[str]
+    twitter: typing.Optional[str]
+    facebook: typing.Optional[str]
+    vk: typing.Optional[str]
+
+
 class User(BaseModel):
     id: int
     user_id: int
     access_level: int
     verificated: bool
+    registered_at: datetime.datetime
     bio: typing.Optional[str]
     status: typing.Optional[str]
     bots: list = []
-    options: dict
+    social: UserSocial
     badges: list
 
 
@@ -98,7 +101,7 @@ class Server(BaseModel):
     id: int
     guild_id: int
     owner_id: int
-    created_at: datetime.datetime
+    added_at: datetime.datetime
     invite: str
     short_description: str
     description: str
