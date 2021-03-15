@@ -1,3 +1,4 @@
+from moonlistclient.models.webhooks import *
 from moonlistclient import MoonlistClient, Webhook
 from discord.ext import commands
 
@@ -59,27 +60,27 @@ class MLCExample(commands.Cog):
         await self.mclient.webhook_manager.run()
 
     @commands.Cog.listener()
-    async def on_new_bot(self, data):
+    async def on_new_bot(self, data: NewBotWebhook):
         print("New bot was added. It data:\n", data)
 
     @commands.Cog.listener()
-    async def on_new_bump(self, data):
+    async def on_new_bump(self, data: NewBumpWebhook):
         print("New bump was added. It data:\n", data)
 
     @commands.Cog.listener()
-    async def on_new_comment(self, data):
+    async def on_new_comment(self, data: NewCommentWebhook):
         print("New comment was added. It data:\n", data)
 
     @commands.Cog.listener()
-    async def on_bot_delete(self, data):
+    async def on_bot_delete(self, data: BotDeleteWebhook):
         print("Bot was deleted. It data:\n", data)
 
     @commands.Cog.listener()
-    async def on_bot_edit(self, data):
+    async def on_bot_edit(self, data: BotEditWebhook):
         print("Bot was edited. It data:\n", data)
 
     @commands.Cog.listener()
-    async def on_bot_edit_currently(self, data):
+    async def on_bot_edit_currently(self, data: BotEditCurrentlyWebhook):
         print("Bot currently was edited. It data:\n", data)
 
 
