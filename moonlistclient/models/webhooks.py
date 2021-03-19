@@ -1,4 +1,6 @@
+import typing
 from pydantic import BaseModel
+from moonlistclient.models.bases import RawBot, BotInEdit, BaseComment, BaseServer, ServerInEdit
 
 
 class BaseWebhookModel(BaseModel):
@@ -9,20 +11,20 @@ class BaseWebhookModel(BaseModel):
 
 
 class NewBotWebhook(BaseWebhookModel):
-    bot: dict
+    bot: RawBot
 
 
 class BotDeleteWebhook(BaseWebhookModel):
     reason: str
-    bot: dict
+    bot: RawBot
 
 
 class BotEditWebhook(BaseWebhookModel):
-    new_data: dict
+    new_data: BotInEdit
 
 
 class BotEditCurrentlyWebhook(BaseWebhookModel):
-    reason: str
+    reason: typing.Optional[str]
     currently: int
 
 
@@ -31,17 +33,17 @@ class NewBumpWebhook(BaseWebhookModel):
 
 
 class NewCommentWebhook(BaseWebhookModel):
-    comment: dict
+    comment: BaseComment
 
 
 class NewServerWebhook(BaseWebhookModel):
-    server: dict
+    server: BaseServer
 
 
 class ServerDeleteWebhook(BaseWebhookModel):
     reason: str
-    server: dict
+    server: BaseServer
 
 
 class ServerEditWebhook(BaseWebhookModel):
-    new_data: dict
+    new_data: ServerInEdit
