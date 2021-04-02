@@ -1,6 +1,11 @@
 import aiohttp
 import asyncio
+import logging
+
 from moonlistclient.exceptions import *
+
+
+logger = logging.getLogger(__name__)
 
 
 class ApiClient:
@@ -19,8 +24,13 @@ class ApiClient:
                 "Authorization": self.api_key
             }
 
+        logger.info(f"Make request for {endpoint} with method {method}")
+
         async with self.session.request(method, self.base_url+endpoint, **kwargs) as response:
             response_json = await response.json()
+            logger.info(f"Response of request to {endpoint} with method {method}: {response_json}")
+            logger.info(f"Response status of request to {endpoint} with method {method}: {response.status}")
+
             if 300 > response.status >= 200:
                 return response_json
 

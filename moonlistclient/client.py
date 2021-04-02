@@ -1,9 +1,15 @@
 import asyncio
 import discord
-from moonlistclient.models.api import *
+import logging
+
+from .models.api import *
+from .models.bases import BotStat
 from .http import ApiClient
 from .exceptions import *
 from .webhook_manager import WebhookManager
+
+
+logger = logging.getLogger(__name__)
 
 
 class MoonlistClient:
@@ -29,10 +35,12 @@ class MoonlistClient:
 
     async def autopost_loop(self):
         while self.bot.is_ready():
+            logger.info("Trying to post bot stat")
             try:
                 await self.post_stat()
-            except HTTPException:
-                pass
+                logger.info("Bot stat was posted")
+            except HTTPException as e:
+                logger.error(f"An error occurred when posting bot stat: {repr(e)}")
             await asyncio.sleep(10800)
 
     async def post_stat(self):
@@ -87,6 +95,7 @@ class MoonlistClient:
         if self._is_closed:
             return
 
+        logger.info("Closing all connections")
         await self.http.close()
         if self._autopost_loop is not None:
             self._autopost_loop.cancel()
