@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='moonlistclient',
-    version='0.6.6',
+    version='0.6.7',
     description='Wrapper for the moonlist api',
     long_description=long_description,
     long_description_content_type="text/markdown",
