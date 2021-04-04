@@ -1,5 +1,7 @@
 import typing
 import discord
+import logging
+
 from .models import webhooks
 from .exceptions import *
 from aiohttp import web
@@ -16,6 +18,7 @@ TRIGGER_TO_MODEl = {
     "server_edit": webhooks.ServerEditWebhook,
     "server_delete": webhooks.ServerDeleteWebhook
 }
+logger = logging.getLogger(__name__)
 
 
 class Webhook:
@@ -114,6 +117,7 @@ class WebhookManager:
             await runner.setup()
             self._webserver = web.TCPSite(runner, self.host, self.port)
             await self._webserver.start()
+            logger.info("Webserver is ran")
 
     async def close(self):
         if not self._is_ran:
