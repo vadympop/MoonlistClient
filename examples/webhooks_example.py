@@ -56,7 +56,7 @@ class MLCExample(commands.Cog):
         )
 
     @commands.Cog.listener()
-    async def on_ready(self):
+    async def on_connect(self):
         await self.mclient.webhook_manager.run()
 
     @commands.Cog.listener()
