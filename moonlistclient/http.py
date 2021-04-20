@@ -19,7 +19,7 @@ class ApiClient:
         if not self.api_key:
             raise Unauthorized("You didn't provide an api key")
 
-    async def _json_or_text(self, response: aiohttp.ClientResponse) -> typing.Union[dict, str]:
+    async def _json_or_text(self, response: aiohttp.ClientResponse) -> typing.Union[list, dict, str]:
         text = await response.text()
         if 'application/json' in response.headers.get('Content-Type', 'text/plain'):
             return json.loads(text)
