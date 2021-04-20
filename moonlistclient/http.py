@@ -1,7 +1,8 @@
 import aiohttp
 import asyncio
 import logging
-
+import typing
+import json
 from moonlistclient.exceptions import *
 
 
@@ -18,6 +19,12 @@ class ApiClient:
         if not self.api_key:
             raise Unauthorized("You didn't provide an api key")
 
+    async def _json_or_text(self, response: aiohttp.ClientResponse) -> typing.Union[dict, str]:
+        text = await response.text()
+        if 'application/json' in response.headers.get('Content-Type', 'text/plain'):
+            return json.loads(text)
+        return text
+
     async def request(self, method: str, endpoint: str, **kwargs):
         if "headers" not in kwargs.keys():
             kwargs["headers"] = {
@@ -27,7 +34,7 @@ class ApiClient:
         logger.info(f"Make request for {endpoint} with method {method}")
 
         async with self.session.request(method, self.base_url+endpoint, **kwargs) as response:
-            response_json = await response.json()
+            response_json = await self._json_or_text(response)
             logger.info(f"Response of request to {endpoint} with method {method}: {response_json}")
             logger.info(f"Response status of request to {endpoint} with method {method}: {response.status}")
 
