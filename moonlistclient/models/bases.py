@@ -13,6 +13,12 @@ class BotStat(BaseModel):
     shards: int
 
 
+class BotInvite(BaseModel):
+    permissions: int = 0
+    slash_commands: bool = False
+    redirect_to: typing.Optional[str]
+
+
 class BotOptions(BaseModel):
     github: typing.Optional[str]
     website: typing.Optional[str]
@@ -22,11 +28,12 @@ class BotOptions(BaseModel):
 
 class BaseBot(BaseModel):
     id: int
+    bot_id: int
     currently: int
     added_at: datetime.datetime
     short_description: str
     description: str
-    invite: str
+    invite: BotInvite
     prefix: str
     tags: list
     lib: str
@@ -42,18 +49,29 @@ class BaseBot(BaseModel):
     owners: typing.List[typing.Optional[DiscordUser]]
 
 
-class RawBot(BaseBot):
+class RawBot(BaseModel):
     bot_id: int
-    count_bumps: typing.Optional[int]
-    discord: typing.Optional[DiscordUser]
+    currently: int
+    added_at: datetime.datetime
+    short_description: str
+    description: str
+    invite: BotInvite
+    prefix: str
+    tags: list
+    lib: str
+    hidden: bool
+    pinned: bool
+    options: BotOptions
+    badges: list
+    verificated: bool
     owner: int
-    owners: typing.List[typing.Optional[int]]
+    owners: typing.List[int]
 
 
 class BotInEdit(BaseModel):
     short_description: typing.Optional[str]
     description: typing.Optional[str]
-    invite: typing.Optional[str]
+    invite: typing.Optional[BotInvite]
     prefix: typing.Optional[str]
     tags: typing.Optional[typing.List[str]]
     lib: typing.Optional[str]
@@ -68,6 +86,7 @@ class BotInEdit(BaseModel):
 class BaseComment(BaseModel):
     id: int
     user_id: int
+    user: DiscordUser
     mark: int
     created_at: datetime.datetime
     edited_at: typing.Optional[datetime.datetime]
@@ -76,7 +95,8 @@ class BaseComment(BaseModel):
 
 class BaseServer(BaseModel):
     id: int
-    owner_id: int
+    guild_id: str
+    owner_id: str
     added_at: datetime.datetime
     invite: str
     short_description: str
@@ -84,6 +104,7 @@ class BaseServer(BaseModel):
     features: dict
     tags: typing.List[str]
     discord: DiscordGuild
+    count_bumps: int
 
 
 class ServerInEdit(BaseModel):
