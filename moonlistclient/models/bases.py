@@ -64,7 +64,7 @@ class RawBot(BaseModel):
     options: BotOptions
     badges: list
     verificated: bool
-    owner: int
+    owner_id: int
     owners: typing.List[int]
 
 
