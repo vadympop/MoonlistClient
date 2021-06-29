@@ -24,7 +24,7 @@ class BotEditWebhook(BaseWebhookModel):
 
 
 class BotEditCurrentlyWebhook(BaseWebhookModel):
-    reason: typing.Optional[str]
+    comment: typing.Optional[str]
     currently: int
 
 
