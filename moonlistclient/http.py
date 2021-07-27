@@ -13,7 +13,7 @@ class ApiClient:
     def __init__(self, api_key: str, **kwargs):
         self.loop = kwargs.get("loop") or asyncio.get_event_loop()
         self.session = kwargs.get("session") or aiohttp.ClientSession(loop=self.loop)
-        self.base_url: str = ""
+        self.base_url: str = "https://api.moonlist.xyz/v1"
         self.api_key: str = api_key
 
         if not self.api_key:
